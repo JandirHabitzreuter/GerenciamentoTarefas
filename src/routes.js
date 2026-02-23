@@ -59,6 +59,9 @@ export const routes = [
       const { id } = req.params;
       const { title, description } = req.body;
 
+      if (database.findById("tasks", id) === -1)
+        return res.writeHead(404).end("Task not found");
+
       database.update("tasks", id, {
         title,
         description,
@@ -68,10 +71,27 @@ export const routes = [
     },
   },
   {
+    method: "PATCH",
+    path: buildRoutePath("/tasks/:id/complete"),
+    handler: (req, res) => {
+      const { id } = req.params;
+
+      if (database.findById("tasks", id) === -1)
+        return res.writeHead(404).end("Task not found");
+
+      database.updateStatus("tasks", id);
+
+      return res.writeHead(204).end();
+    },
+  },
+  {
     method: "DELETE",
     path: buildRoutePath("/tasks/:id"),
     handler: (req, res) => {
       const { id } = req.params;
+
+      if (database.findById("tasks", id) === -1)
+        return res.writeHead(404).end("Task not found");
 
       database.delete("tasks", id);
 

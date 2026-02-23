@@ -19,6 +19,11 @@ export class Database {
     fs.writeFile(databasePath, JSON.stringify(this.#database));
   }
 
+  findById(table, id) {
+    const rows = this.#database[table] ?? [];
+    return rows.findIndex((row) => row.id === id);
+  }
+
   select(table, search) {
     let data = this.#database[table] ?? [];
 
@@ -46,7 +51,7 @@ export class Database {
   }
 
   update(table, id, data) {
-    const rowIndex = this.#database[table].findIndex((row) => row.id === id);
+    const rowIndex = this.findById(table, id);
 
     if (rowIndex > -1) {
       const currentRow = this.#database[table][rowIndex];
@@ -70,8 +75,28 @@ export class Database {
     }
   }
 
+  updateStatus(table, id) {
+    const rowIndex = this.findById(table, id);
+
+    if (rowIndex > -1) {
+      const currentRow = this.#database[table][rowIndex];
+
+      const completeAt = currentRow.completed_at ? null : new Date();
+
+      console.log(completeAt);
+
+      this.#database[table][rowIndex] = {
+        ...currentRow,
+        completed_at: completeAt,
+        updated_at: new Date(),
+      };
+
+      this.#persist();
+    }
+  }
+
   delete(table, id) {
-    const rowIndex = this.#database[table].findIndex((row) => row.id === id);
+    const rowIndex = this.findById(table, id);
 
     if (rowIndex > -1) {
       this.#database[table].splice(rowIndex, 1);
