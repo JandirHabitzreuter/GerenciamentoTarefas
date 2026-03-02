@@ -1,0 +1,29 @@
+title,description
+Create task,Add a new task to the list
+Edit task,Update task details
+Delete task,Remove a task from the system
+Complete task,Mark task as finished
+Reopen task,Mark task as pending again
+Set priority,Define task importance level
+Assign task,Link task to a user
+Unassign task,Remove user from task
+Add due date,Set deadline for task
+Remove due date,Clear task deadline
+Add tag,Attach a label to task
+Remove tag,Detach label from task
+Search tasks,Find tasks by keyword
+Filter by status,Show tasks by status
+Filter by priority,Show tasks by priority
+Sort by date,Order tasks by date
+Archive task,Move task to archive
+Restore task,Recover archived task
+Duplicate task,Create a copy of task
+Add description,Write task details
+Update description,Modify task details
+Clear description,Remove task details
+View task,Open task information
+List tasks,Display all tasks
+Count tasks,Show total task number
+Move task,Change task position
+Pin task,Keep task at top
+Unpin task,Remove task from top
